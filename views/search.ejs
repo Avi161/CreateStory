@@ -1,0 +1,164 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Header Section -->
+    <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            Explore Stories
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-400">
+            Discover interactive stories created by our community
+        </p>
+    </div>
+
+    <!-- Search Form -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8">
+        <form action="/search" method="GET" class="space-y-4">
+            <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+                <div class="flex-grow">
+                    <label for="search" class="sr-only">Search</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-search text-gray-400"></i>
+                        </div>
+                        <input type="text" name="q" id="search" value="<%= locals.query || '' %>" 
+                            class="input-field pl-10" 
+                            placeholder="Search stories by title, description, or content">
+                    </div>
+                </div>
+                <div class="w-full md:w-48">
+                    <label for="genre" class="sr-only">Genre</label>
+                    <select name="genre" id="genre" class="select-field">
+                        <option value="">All Genres</option>
+                        <% if (locals.genres && genres.length > 0) { %>
+                            <% genres.forEach(genre => { %>
+                                <option value="<%= genre %>" <%= locals.genre === genre ? 'selected' : '' %>><%= genre %></option>
+                            <% }); %>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="w-full md:w-48">
+                    <label for="sort" class="sr-only">Sort By</label>
+                    <select name="sort" id="sort" class="select-field">
+                        <option value="relevance" <%= (locals.sort === 'relevance' || !locals.sort) ? 'selected' : '' %>>Most Relevant</option>
+                        <option value="newest" <%= locals.sort === 'newest' ? 'selected' : '' %>>Newest First</option>
+                        <option value="popular" <%= locals.sort === 'popular' ? 'selected' : '' %>>Most Popular</option>
+                        <option value="trending" <%= locals.sort === 'trending' ? 'selected' : '' %>>Trending</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary w-full">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Results Section -->
+    <div>
+        <% if (locals.error) { %>
+            <div class="alert alert-error mb-8">
+                <i class="fas fa-exclamation-circle mr-2"></i>
+                <%= error %>
+            </div>
+        <% } %>
+
+        <% if (locals.stories && stories.length > 0) { %>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <% stories.forEach(story => { %>
+                    <div class="story-card">
+                        <% if (story.coverImage) { %>
+                            <img src="<%= story.coverImage %>" alt="<%= story.title %>" class="story-card-image">
+                        <% } else { %>
+                            <div class="story-card-image bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                                <i class="fas fa-book-open text-4xl text-gray-400 dark:text-gray-500"></i>
+                            </div>
+                        <% } %>
+                        <div class="story-card-content">
+                            <h3 class="story-card-title"><%= story.title %></h3>
+                            <p class="story-card-description"><%= story.description %></p>
+                            <div class="story-card-meta">
+                                <span class="story-tag"><%= story.genre %></span>
+                                <div class="story-stats">
+                                    <span class="stat-item">
+                                        <i class="fas fa-eye mr-1"></i>
+                                        <%= story.metadata.views %>
+                                    </span>
+                                    <span class="stat-item">
+                                        <i class="fas fa-heart mr-1"></i>
+                                        <%= story.metadata.likes %>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <a href="/stories/<%= story._id %>" class="btn btn-secondary w-full">
+                                    Read Story
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+
+            <!-- Pagination -->
+            <% if (locals.totalPages && totalPages > 1) { %>
+                <div class="flex justify-center">
+                    <div class="flex items-center space-x-2">
+                        <% if (locals.currentPage && currentPage > 1) { %>
+                            <a href="/search?q=<%= encodeURIComponent(query || '') %>&genre=<%= genre || '' %>&sort=<%= sort || 'relevance' %>&page=<%= currentPage - 1 %>" 
+                                class="pagination-btn">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        <% } else { %>
+                            <button disabled class="pagination-btn opacity-50 cursor-not-allowed">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                        <% } %>
+                        
+                        <% 
+                        let startPage = Math.max(1, currentPage - 2);
+                        let endPage = Math.min(totalPages, startPage + 4);
+                        if (endPage - startPage < 4) startPage = Math.max(1, endPage - 4);
+                        
+                        for (let i = startPage; i <= endPage; i++) { %>
+                            <a href="/search?q=<%= encodeURIComponent(query || '') %>&genre=<%= genre || '' %>&sort=<%= sort || 'relevance' %>&page=<%= i %>" 
+                                class="pagination-btn <%= i === currentPage ? 'active' : '' %>">
+                                <%= i %>
+                            </a>
+                        <% } %>
+                        
+                        <% if (currentPage < totalPages) { %>
+                            <a href="/search?q=<%= encodeURIComponent(query || '') %>&genre=<%= genre || '' %>&sort=<%= sort || 'relevance' %>&page=<%= currentPage + 1 %>" 
+                                class="pagination-btn">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        <% } else { %>
+                            <button disabled class="pagination-btn opacity-50 cursor-not-allowed">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        <% } %>
+                    </div>
+                </div>
+            <% } %>
+        <% } else if (locals.query || locals.genre) { %>
+            <div class="text-center py-12">
+                <div class="text-6xl text-gray-300 dark:text-gray-700 mb-4">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3 class="text-2xl font-medium text-gray-700 dark:text-gray-300 mb-2">No stories found</h3>
+                <p class="text-gray-500 dark:text-gray-400">
+                    Try different search terms or remove some filters
+                </p>
+            </div>
+        <% } else { %>
+            <div class="text-center py-12">
+                <div class="text-6xl text-gray-300 dark:text-gray-700 mb-4">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3 class="text-2xl font-medium text-gray-700 dark:text-gray-300 mb-2">Start exploring</h3>
+                <p class="text-gray-500 dark:text-gray-400">
+                    Use the search bar above to discover interactive stories
+                </p>
+            </div>
+        <% } %>
+    </div>
+</div> 

@@ -1,0 +1,114 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
+            Contact Us
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-400 mb-8">
+            Have questions or feedback? We'd love to hear from you.
+        </p>
+    </div>
+
+    <div class="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-5">
+            <!-- Contact Info -->
+            <div class="bg-indigo-600 dark:bg-indigo-700 p-8 text-white md:col-span-2">
+                <h2 class="text-2xl font-bold mb-6">Get in Touch</h2>
+                
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 mt-1">
+                            <i class="fas fa-envelope-open-text text-indigo-200"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-white">Email Us</h4>
+                            <p class="mt-1 text-indigo-200">
+                                Our team will get back to you within 24 hours.
+                            </p>
+                            <a href="mailto:support@createstory.com" class="mt-2 inline-block text-white hover:underline">
+                                support@createstory.com
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 mt-1">
+                            <i class="fas fa-map-marker-alt text-indigo-200"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-white">Our Office</h4>
+                            <p class="mt-1 text-indigo-200">
+                                123 Story Lane<br>
+                                San Francisco, CA 94103<br>
+                                United States
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 mt-1">
+                            <i class="fas fa-headset text-indigo-200"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-white">Support Hours</h4>
+                            <p class="mt-1 text-indigo-200">
+                                Monday - Friday: 9am - 5pm PST<br>
+                                Weekend: Closed
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 pt-8 border-t border-indigo-500">
+                    <h4 class="text-lg font-medium text-white mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-indigo-200 hover:text-white transition-colors">
+                            <i class="fab fa-twitter text-lg"></i>
+                        </a>
+                        <a href="#" class="text-indigo-200 hover:text-white transition-colors">
+                            <i class="fab fa-facebook text-lg"></i>
+                        </a>
+                        <a href="#" class="text-indigo-200 hover:text-white transition-colors">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                        <a href="#" class="text-indigo-200 hover:text-white transition-colors">
+                            <i class="fab fa-github text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Form -->
+            <div class="p-8 md:col-span-3">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Send a Message</h2>
+                
+                <form action="/contact" method="POST" class="space-y-6">
+                    <div>
+                        <label for="name" class="form-label">Your Name</label>
+                        <input type="text" id="name" name="name" required class="input-field">
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" id="email" name="email" required class="input-field">
+                    </div>
+                    
+                    <div>
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" id="subject" name="subject" required class="input-field">
+                    </div>
+                    
+                    <div>
+                        <label for="message" class="form-label">Message</label>
+                        <textarea id="message" name="message" rows="5" required class="textarea-field"></textarea>
+                    </div>
+                    
+                    <div>
+                        <button type="submit" class="btn btn-primary w-full">
+                            <i class="fas fa-paper-plane mr-2"></i> Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 

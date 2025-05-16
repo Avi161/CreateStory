@@ -1,0 +1,134 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Hero Section -->
+    <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
+            Create Interactive Stories
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-400 mb-8">
+            Build branching narratives, develop characters, and share your stories with the world.
+        </p>
+        <div class="flex justify-center space-x-4">
+            <a href="/stories/create" class="btn btn-primary">
+                <i class="fas fa-plus mr-2"></i> Create Story
+            </a>
+            <a href="/search" class="btn btn-secondary">
+                <i class="fas fa-search mr-2"></i> Explore Stories
+            </a>
+        </div>
+    </div>
+
+    <!-- Featured Stories -->
+    <section class="mb-16">
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Featured Stories</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <% if (featuredStories && featuredStories.length > 0) { %>
+                <% featuredStories.forEach(story => { %>
+                    <div class="story-card">
+                        <% if (story.coverImage) { %>
+                            <img src="<%= story.coverImage %>" alt="<%= story.title %>" class="story-card-image">
+                        <% } else { %>
+                            <div class="story-card-image bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                                <i class="fas fa-book-open text-4xl text-gray-400 dark:text-gray-500"></i>
+                            </div>
+                        <% } %>
+                        <div class="story-card-content">
+                            <h3 class="story-card-title"><%= story.title %></h3>
+                            <p class="story-card-description"><%= story.description %></p>
+                            <div class="story-card-meta">
+                                <span class="story-tag"><%= story.genre %></span>
+                                <div class="story-stats">
+                                    <span class="stat-item">
+                                        <i class="fas fa-eye mr-1"></i>
+                                        <%= story.metadata.views %>
+                                    </span>
+                                    <span class="stat-item">
+                                        <i class="fas fa-heart mr-1"></i>
+                                        <%= story.metadata.likes %>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p class="text-gray-600 dark:text-gray-400 col-span-3 text-center py-8">
+                    No featured stories available yet.
+                </p>
+            <% } %>
+        </div>
+    </section>
+
+    <!-- Latest Stories -->
+    <section class="mb-16">
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Latest Stories</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <% if (latestStories && latestStories.length > 0) { %>
+                <% latestStories.forEach(story => { %>
+                    <div class="story-card">
+                        <% if (story.coverImage) { %>
+                            <img src="<%= story.coverImage %>" alt="<%= story.title %>" class="story-card-image">
+                        <% } else { %>
+                            <div class="story-card-image bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                                <i class="fas fa-book-open text-4xl text-gray-400 dark:text-gray-500"></i>
+                            </div>
+                        <% } %>
+                        <div class="story-card-content">
+                            <h3 class="story-card-title"><%= story.title %></h3>
+                            <p class="story-card-description"><%= story.description %></p>
+                            <div class="story-card-meta">
+                                <span class="story-tag"><%= story.genre %></span>
+                                <div class="story-stats">
+                                    <span class="stat-item">
+                                        <i class="fas fa-clock mr-1"></i>
+                                        <%= new Date(story.createdAt).toLocaleDateString() %>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p class="text-gray-600 dark:text-gray-400 col-span-3 text-center py-8">
+                    No stories available yet.
+                </p>
+            <% } %>
+        </div>
+    </section>
+
+    <!-- Trending Stories -->
+    <section>
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Trending Stories</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <% if (trendingStories && trendingStories.length > 0) { %>
+                <% trendingStories.forEach(story => { %>
+                    <div class="story-card">
+                        <% if (story.coverImage) { %>
+                            <img src="<%= story.coverImage %>" alt="<%= story.title %>" class="story-card-image">
+                        <% } else { %>
+                            <div class="story-card-image bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                                <i class="fas fa-book-open text-4xl text-gray-400 dark:text-gray-500"></i>
+                            </div>
+                        <% } %>
+                        <div class="story-card-content">
+                            <h3 class="story-card-title"><%= story.title %></h3>
+                            <p class="story-card-description"><%= story.description %></p>
+                            <div class="story-card-meta">
+                                <span class="story-tag"><%= story.genre %></span>
+                                <div class="story-stats">
+                                    <span class="stat-item">
+                                        <i class="fas fa-fire mr-1"></i>
+                                        Trending
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p class="text-gray-600 dark:text-gray-400 col-span-3 text-center py-8">
+                    No trending stories available yet.
+                </p>
+            <% } %>
+        </div>
+    </section>
+</div> 

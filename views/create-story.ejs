@@ -1,0 +1,36 @@
+<div class="max-w-2xl mx-auto py-10 px-4">
+    <h1 class="text-3xl font-bold mb-6">Create a New Story</h1>
+    <% if (typeof error !== 'undefined') { %>
+        <div class="alert alert-error mb-4"><%- error %></div>
+    <% } %>
+    <form action="/stories/create" method="POST" class="space-y-6 bg-white p-8 rounded-xl shadow">
+        <div class="form-group">
+            <label class="form-label" for="title">Title</label>
+            <input type="text" id="title" name="title" class="input-field" required value="<%= typeof formData !== 'undefined' ? formData.title : '' %>">
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="description">Description</label>
+            <textarea id="description" name="description" class="textarea-field" rows="3" required><%= typeof formData !== 'undefined' ? formData.description : '' %></textarea>
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="genre">Genre</label>
+            <select id="genre" name="genre" class="select-field" required>
+                <option value="">Select a genre</option>
+                <% genres.forEach(function(genre) { %>
+                    <option value="<%= genre %>" <%= (typeof formData !== 'undefined' && formData.genre === genre) ? 'selected' : '' %>><%= genre %></option>
+                <% }); %>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="content">Story Content (First Chapter/Segment)</label>
+            <textarea id="content" name="content" class="textarea-field" rows="8" required><%= typeof formData !== 'undefined' ? formData.content : '' %></textarea>
+        </div>
+        <div class="form-group flex items-center">
+            <input type="checkbox" id="isPublic" name="isPublic" class="mr-2" <%= (typeof formData !== 'undefined' && formData.isPublic === 'on') ? 'checked' : '' %>>
+            <label for="isPublic" class="form-label mb-0">Make story public</label>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary w-full">Create Story</button>
+        </div>
+    </form>
+</div> 

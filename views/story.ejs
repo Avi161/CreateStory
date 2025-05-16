@@ -1,0 +1,87 @@
+<div class="max-w-4xl mx-auto py-10 px-4">
+    <% if (story) { %>
+        <article class="bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden">
+            <% if (story.coverImage) { %>
+                <img src="<%= story.coverImage %>" alt="<%= story.title %> Cover Image" class="w-full h-64 md:h-96 object-cover">
+            <% } else { %>
+                <div class="w-full h-64 md:h-96 bg-gradient-to-r from-indigo-500 to-purple-600 dark:from-indigo-700 dark:to-purple-800 flex items-center justify-center">
+                    <i class="fas fa-book-open text-7xl text-white opacity-75"></i>
+                </div>
+            <% } %>
+
+            <div class="p-6 md:p-10">
+                <header class="mb-6">
+                    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-2"><%= story.title %></h1>
+                    <div class="flex flex-wrap items-center text-sm text-gray-600 dark:text-gray-400">
+                        <% if (story.author) { %>
+                            <span class="mr-4"><i class="fas fa-user mr-1"></i> By <%= story.author.profile && story.author.profile.displayName ? story.author.profile.displayName : story.author.username %></span>
+                        <% } %>
+                        <span class="mr-4"><i class="fas fa-folder-open mr-1"></i> Genre: <%= story.genre %></span>
+                        <span class="mr-4"><i class="fas fa-eye mr-1"></i> <%= story.metadata.isPublic ? 'Public' : 'Private' %></span>
+                        <span title="Last updated"><i class="fas fa-clock mr-1"></i> <%= new Date(story.updatedAt).toLocaleDateString() %></span>
+                    </div>
+                </header>
+
+                <% if (story.description) { %>
+                    <section class="prose prose-lg dark:prose-invert max-w-none mb-8">
+                        <p class="text-lg italic text-gray-700 dark:text-gray-300"><%= story.description %></p>
+                    </section>
+                <% } %> 
+
+                <% 
+                let startSegment = null;
+                if (story.segments && story.metadata && story.metadata.startSegmentId) {
+                    startSegment = story.segments.find(s => s.segmentId === story.metadata.startSegmentId);
+                }
+                %> 
+
+                <% if (startSegment) { %>
+                    <section class="story-content prose prose-xl dark:prose-invert max-w-none mb-8 whitespace-pre-line">
+                        <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3"><%= startSegment.title || 'Chapter 1' %></h2>
+                        <p><%= startSegment.content %></p>
+                    </section>
+
+                    <% if (startSegment.choices && startSegment.choices.length > 0) { %>
+                        <nav class="story-choices mb-8">
+                            <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">What do you do next?</h3>
+                            <ul class="space-y-3">
+                                <% startSegment.choices.forEach(function(choice) { %>
+                                    <li>
+                                        <a href="/stories/<%= story._id %>/segment/<%= choice.nextSegmentId %>" class="btn btn-outline block text-center">
+                                            <%= choice.text %>
+                                        </a>
+                                    </li>
+                                <% }); %>
+                            </ul>
+                        </nav>
+                    <% } else { %>
+                        <p class="text-center text-gray-500 dark:text-gray-400 italic">The story ends here... for now.</p>
+                    <% } %>
+                <% } else { %>
+                    <p class="text-center text-red-500 dark:text-red-400 font-semibold">This story doesn't have a starting segment defined or the start segment is missing!</p>
+                <% } %>
+
+                <% if (user && story.author && user.id.toString() === story.author._id.toString()) { %>
+                    <div class="mt-10 pt-6 border-t border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                        <a href="/stories/<%= story._id %>/edit" class="btn btn-secondary w-full sm:w-auto">
+                            <i class="fas fa-edit mr-2"></i> Edit Story
+                        </a>
+                        <form action="/stories/<%= story._id %>/delete" method="POST" class="w-full sm:w-auto" onsubmit="return confirm('Are you sure you want to delete this story permanently?');">
+                            <button type="submit" class="btn btn-danger w-full">
+                                <i class="fas fa-trash-alt mr-2"></i> Delete Story
+                            </button>
+                        </form>
+                    </div>
+                <% } %>
+            </div>
+        </article>
+    <% } else { %>
+        <div class="text-center py-20">
+            <i class="fas fa-question-circle text-6xl text-gray-400 dark:text-gray-600 mb-4"></i>
+            <p class="text-2xl text-gray-700 dark:text-gray-300">Story not found.</p>
+            <p class="mt-4">
+                <a href="/stories" class="text-indigo-600 dark:text-indigo-400 hover:underline">Return to all stories</a>
+            </p>
+        </div>
+    <% } %>
+</div> 

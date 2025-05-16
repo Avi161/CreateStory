@@ -1,0 +1,627 @@
+/* Base styles */
+:root {
+    --primary-color: #4f46e5;
+    --primary-hover: #4338ca;
+    --secondary-color: #6b7280;
+    --secondary-hover: #4b5563;
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    --warning-color: #f59e0b;
+    --info-color: #3b82f6;
+}
+
+/* Typography */
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+}
+
+/* Navigation */
+.nav-link {
+    @apply inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white border-b-2 border-transparent hover:border-indigo-500 dark:hover:border-indigo-400;
+}
+
+.nav-link.active {
+    @apply text-gray-900 dark:text-white border-indigo-500 dark:border-indigo-400;
+}
+
+.mobile-nav-link {
+    @apply block px-3 py-2 text-base font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700;
+}
+
+.mobile-nav-link.active {
+    @apply text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700;
+}
+
+/* Buttons */
+.btn {
+    @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200;
+}
+
+.btn-primary {
+    @apply bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-indigo-500;
+}
+
+.btn-secondary {
+    @apply bg-gray-200 text-gray-700 hover:bg-gray-300 focus:ring-gray-500 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600;
+}
+
+.btn-success {
+    @apply bg-green-600 text-white hover:bg-green-700 focus:ring-green-500;
+}
+
+.btn-danger {
+    @apply bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+}
+
+/* Cards */
+.card {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-transform duration-200 hover:transform hover:scale-105;
+}
+
+.card-header {
+    @apply px-6 py-4 border-b border-gray-200 dark:border-gray-700;
+}
+
+.card-body {
+    @apply px-6 py-4;
+}
+
+.card-footer {
+    @apply px-6 py-4 border-t border-gray-200 dark:border-gray-700;
+}
+
+/* Story cards */
+.story-card {
+    @apply card;
+}
+
+.story-card-image {
+    @apply w-full h-48 object-cover;
+}
+
+.story-card-content {
+    @apply p-4;
+}
+
+.story-card-title {
+    @apply text-xl font-semibold text-gray-900 dark:text-white mb-2;
+}
+
+.story-card-description {
+    @apply text-gray-600 dark:text-gray-400 text-sm mb-4;
+}
+
+.story-card-meta {
+    @apply flex items-center justify-between text-sm text-gray-500 dark:text-gray-400;
+}
+
+/* Forms */
+.form-group {
+    @apply mb-4;
+}
+
+.form-label {
+    @apply block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1;
+}
+
+.form-input {
+    @apply block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white;
+}
+
+.form-textarea {
+    @apply form-input;
+    min-height: 100px;
+}
+
+.form-select {
+    @apply form-input;
+}
+
+.form-checkbox {
+    @apply h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded;
+}
+
+/* Alerts */
+.alert {
+    @apply p-4 rounded-md mb-4;
+}
+
+.alert-success {
+    @apply bg-green-50 text-green-800 dark:bg-green-900 dark:text-green-200;
+}
+
+.alert-error {
+    @apply bg-red-50 text-red-800 dark:bg-red-900 dark:text-red-200;
+}
+
+.alert-warning {
+    @apply bg-yellow-50 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200;
+}
+
+.alert-info {
+    @apply bg-blue-50 text-blue-800 dark:bg-blue-900 dark:text-blue-200;
+}
+
+/* Dropdowns */
+.dropdown-item {
+    @apply block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700;
+}
+
+.mobile-dropdown-item {
+    @apply block px-4 py-2 text-base text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700;
+}
+
+/* Footer */
+.footer-link {
+    @apply text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white;
+}
+
+/* Story editor */
+.story-editor {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6;
+}
+
+.story-segment {
+    @apply mb-8 p-6 bg-gray-50 dark:bg-gray-700 rounded-lg;
+}
+
+.story-choice {
+    @apply flex items-center space-x-2 p-3 bg-white dark:bg-gray-800 rounded-md shadow-sm mb-2;
+}
+
+/* Story visualization */
+.story-map {
+    @apply w-full h-[600px] bg-white dark:bg-gray-800 rounded-lg shadow-lg;
+}
+
+.story-node {
+    @apply fill-white dark:fill-gray-800 stroke-indigo-500 dark:stroke-indigo-400;
+}
+
+.story-link {
+    @apply stroke-gray-400 dark:stroke-gray-600;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.animate-slide-in {
+    animation: slideIn 0.3s ease-in-out;
+}
+
+/* Story reader */
+.story-reader {
+    @apply max-w-3xl mx-auto px-4 py-8;
+}
+
+.story-content {
+    @apply prose dark:prose-invert max-w-none;
+}
+
+.story-choices {
+    @apply mt-8 space-y-4;
+}
+
+.story-choice-button {
+    @apply w-full p-4 text-left bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 border border-gray-200 dark:border-gray-700;
+}
+
+/* Character cards */
+.character-card {
+    @apply card p-4;
+}
+
+.character-avatar {
+    @apply w-24 h-24 rounded-full mx-auto mb-4 object-cover;
+}
+
+.character-name {
+    @apply text-xl font-semibold text-center text-gray-900 dark:text-white mb-2;
+}
+
+.character-description {
+    @apply text-sm text-gray-600 dark:text-gray-400 text-center;
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+    .story-reader {
+        @apply px-2;
+    }
+
+    .story-card-image {
+        @apply h-32;
+    }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 dark:bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-500 dark:bg-gray-500;
+}
+
+/* Loading states */
+.loading {
+    @apply animate-pulse bg-gray-200 dark:bg-gray-700;
+}
+
+.loading-text {
+    @apply h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4;
+}
+
+/* Tooltips */
+.tooltip {
+    @apply relative inline-block;
+}
+
+.tooltip-text {
+    @apply invisible absolute z-10 px-3 py-2 text-sm text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-200;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.tooltip:hover .tooltip-text {
+    @apply visible opacity-100;
+}
+
+/* Story tags */
+.story-tag {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200;
+}
+
+/* Story stats */
+.story-stats {
+    @apply flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400;
+}
+
+.stat-item {
+    @apply flex items-center space-x-1;
+}
+
+/* Rich text editor */
+.rich-text-editor {
+    @apply border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden;
+}
+
+.editor-toolbar {
+    @apply flex items-center space-x-2 p-2 bg-gray-100 dark:bg-gray-700 border-b border-gray-300 dark:border-gray-600;
+}
+
+.editor-content {
+    @apply p-4 min-h-[200px] focus:outline-none;
+}
+
+/* Story timeline */
+.timeline {
+    @apply relative pl-8 border-l-2 border-gray-200 dark:border-gray-700;
+}
+
+.timeline-item {
+    @apply relative mb-8;
+}
+
+.timeline-dot {
+    @apply absolute w-4 h-4 bg-indigo-500 rounded-full -left-[9px] top-1;
+}
+
+.timeline-content {
+    @apply ml-4;
+}
+
+/* Story visualization controls */
+.visualization-controls {
+    @apply flex items-center space-x-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm;
+}
+
+.control-button {
+    @apply p-2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline-none;
+}
+
+/* Story export options */
+.export-options {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-4;
+}
+
+.export-option {
+    @apply p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-indigo-500 dark:hover:border-indigo-400 cursor-pointer transition-colors duration-200;
+}
+
+/* Story templates */
+.template-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+}
+
+.template-card {
+    @apply card cursor-pointer hover:border-indigo-500 dark:hover:border-indigo-400;
+}
+
+.template-preview {
+    @apply h-48 bg-gray-100 dark:bg-gray-700 flex items-center justify-center;
+}
+
+.template-info {
+    @apply p-4;
+}
+
+/* Story settings */
+.settings-section {
+    @apply mb-8;
+}
+
+.settings-title {
+    @apply text-lg font-semibold mb-4;
+}
+
+.settings-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-6;
+}
+
+/* Story analytics */
+.analytics-card {
+    @apply card p-6;
+}
+
+.analytics-title {
+    @apply text-lg font-semibold mb-4;
+}
+
+.analytics-value {
+    @apply text-3xl font-bold text-indigo-600 dark:text-indigo-400;
+}
+
+.analytics-label {
+    @apply text-sm text-gray-500 dark:text-gray-400;
+}
+
+/* Story collaboration */
+.collaborator-list {
+    @apply space-y-2;
+}
+
+.collaborator-item {
+    @apply flex items-center justify-between p-2 bg-gray-50 dark:bg-gray-700 rounded-lg;
+}
+
+.collaborator-info {
+    @apply flex items-center space-x-3;
+}
+
+.collaborator-avatar {
+    @apply w-8 h-8 rounded-full;
+}
+
+.collaborator-name {
+    @apply text-sm font-medium;
+}
+
+.collaborator-role {
+    @apply text-xs text-gray-500 dark:text-gray-400;
+}
+
+/* Story comments */
+.comment-section {
+    @apply mt-8;
+}
+
+.comment-list {
+    @apply space-y-4;
+}
+
+.comment-item {
+    @apply p-4 bg-gray-50 dark:bg-gray-700 rounded-lg;
+}
+
+.comment-header {
+    @apply flex items-center justify-between mb-2;
+}
+
+.comment-author {
+    @apply flex items-center space-x-2;
+}
+
+.comment-content {
+    @apply text-gray-700 dark:text-gray-300;
+}
+
+.comment-actions {
+    @apply flex items-center space-x-2 mt-2;
+}
+
+/* Story sharing */
+.share-options {
+    @apply flex items-center space-x-4;
+}
+
+.share-button {
+    @apply p-2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white rounded-full hover:bg-gray-100 dark:hover:bg-gray-700;
+}
+
+/* Story feedback */
+.feedback-form {
+    @apply space-y-4;
+}
+
+.rating-stars {
+    @apply flex items-center space-x-1;
+}
+
+.star-button {
+    @apply text-2xl text-gray-300 dark:text-gray-600 hover:text-yellow-400 dark:hover:text-yellow-400;
+}
+
+.star-active {
+    @apply text-yellow-400;
+}
+
+/* Story version history */
+.version-list {
+    @apply space-y-2;
+}
+
+.version-item {
+    @apply p-3 bg-gray-50 dark:bg-gray-700 rounded-lg;
+}
+
+.version-header {
+    @apply flex items-center justify-between mb-1;
+}
+
+.version-date {
+    @apply text-sm text-gray-500 dark:text-gray-400;
+}
+
+.version-changes {
+    @apply text-sm text-gray-700 dark:text-gray-300;
+}
+
+/* Story import/export */
+.import-export-section {
+    @apply space-y-4;
+}
+
+.file-upload {
+    @apply border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center;
+}
+
+.file-upload-active {
+    @apply border-indigo-500 dark:border-indigo-400;
+}
+
+/* Story templates */
+.template-category {
+    @apply mb-8;
+}
+
+.template-category-title {
+    @apply text-xl font-semibold mb-4;
+}
+
+.template-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+}
+
+.template-card {
+    @apply card cursor-pointer;
+}
+
+.template-preview {
+    @apply h-48 bg-gray-100 dark:bg-gray-700 flex items-center justify-center;
+}
+
+.template-info {
+    @apply p-4;
+}
+
+.template-title {
+    @apply text-lg font-semibold mb-2;
+}
+
+.template-description {
+    @apply text-sm text-gray-600 dark:text-gray-400;
+}
+
+/* Story help */
+.help-section {
+    @apply space-y-6;
+}
+
+.help-item {
+    @apply p-4 bg-gray-50 dark:bg-gray-700 rounded-lg;
+}
+
+.help-question {
+    @apply text-lg font-semibold mb-2;
+}
+
+.help-answer {
+    @apply text-gray-700 dark:text-gray-300;
+}
+
+/* Story keyboard shortcuts */
+.shortcuts-list {
+    @apply space-y-2;
+}
+
+.shortcut-item {
+    @apply flex items-center justify-between p-2 bg-gray-50 dark:bg-gray-700 rounded-lg;
+}
+
+.shortcut-keys {
+    @apply flex items-center space-x-1;
+}
+
+.shortcut-key {
+    @apply px-2 py-1 bg-gray-200 dark:bg-gray-600 rounded text-sm font-mono;
+}
+
+.shortcut-description {
+    @apply text-sm text-gray-700 dark:text-gray-300;
+}
+
+/* Input Fields */
+.input-field {
+    @apply block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white;
+}
+
+.textarea-field {
+    @apply input-field;
+    min-height: 100px;
+}
+
+.select-field {
+    @apply block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white;
+}
+
+/* Pagination */
+.pagination-btn {
+    @apply inline-flex items-center justify-center w-10 h-10 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700;
+}
+
+.pagination-btn.active {
+    @apply bg-indigo-600 border-indigo-600 text-white dark:bg-indigo-500 dark:border-indigo-500;
+}
+
+/* Sort buttons */
+.sort-btn {
+    @apply px-3 py-1 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700;
+}
+
+.sort-btn.active {
+    @apply text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600;
+}
+
+/* Genre pill */
+.genre-pill {
+    @apply inline-block px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200 hover:bg-indigo-100 hover:text-indigo-800 dark:hover:bg-indigo-900 dark:hover:text-indigo-200;
+} 

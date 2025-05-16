@@ -1,0 +1,20 @@
+<div class="min-h-[60vh] flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+        <h1 class="text-6xl font-bold text-red-600 dark:text-red-400 mb-4">
+            <i class="fas fa-exclamation-circle"></i>
+        </h1>
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+            <%= message || 'Something went wrong' %>
+        </h2>
+        <% if (error && error.stack && process.env.NODE_ENV !== 'production') { %>
+            <div class="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg text-left overflow-auto">
+                <pre class="text-sm text-gray-600 dark:text-gray-400"><%= error.stack %></pre>
+            </div>
+        <% } %>
+        <div class="mt-8">
+            <a href="/" class="btn btn-primary">
+                <i class="fas fa-home mr-2"></i> Go Home
+            </a>
+        </div>
+    </div>
+</div> 

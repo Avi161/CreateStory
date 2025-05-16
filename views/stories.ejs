@@ -1,0 +1,68 @@
+<div class="max-w-4xl mx-auto py-10 px-4">
+    <div class="flex justify-between items-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-800 dark:text-white"><%= title %></h1>
+        <% if (user) { %>
+            <a href="/stories/create" class="btn btn-primary">
+                <i class="fas fa-plus mr-2"></i> Create New Story
+            </a>
+        <% } %>
+    </div>
+
+    <% if (stories && stories.length > 0) { %>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <% stories.forEach(function(story) { %>
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col">
+                    <% if (story.coverImage) { %>
+                        <img src="<%= story.coverImage %>" alt="<%= story.title %> cover" class="w-full h-48 object-cover">
+                    <% } else { %>
+                        <div class="w-full h-48 bg-indigo-500 dark:bg-indigo-700 flex items-center justify-center">
+                            <i class="fas fa-book-open text-5xl text-indigo-200 dark:text-indigo-400"></i>
+                        </div>
+                    <% } %>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h2 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">
+                                <a href="/stories/<%= story._id %>" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition duration-150">
+                                    <%= story.title %>
+                                </a>
+                            </h2>
+                            <% if (story.author) { %>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                                    By: <%= story.author.profile && story.author.profile.displayName ? story.author.profile.displayName : story.author.username %>
+                                </p>
+                            <% } %>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mb-3">
+                                Genre: <%= story.genre %>
+                                <% if (story.metadata && story.metadata.isPublic !== undefined) { %>
+                                    <span class="ml-2 px-2 py-0.5 text-xs font-semibold rounded-full <%= story.metadata.isPublic ? 'bg-green-100 text-green-800 dark:bg-green-700 dark:text-green-200' : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-700 dark:text-yellow-200' %>">
+                                        <%= story.metadata.isPublic ? 'Public' : 'Private' %>
+                                    </span>
+                                <% } %>
+                            </p>
+                            <p class="text-gray-700 dark:text-gray-300 text-sm mb-4 line-clamp-3">
+                                <%= story.description || 'No description available.' %>
+                            </p>
+                        </div>
+                        <div class="mt-auto">
+                            <a href="/stories/<%= story._id %>" class="btn btn-secondary text-sm w-full">
+                                Read More <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    <% } else { %>
+        <div class="text-center py-10">
+            <i class="fas fa-book-reader text-6xl text-gray-400 dark:text-gray-600 mb-4"></i>
+            <p class="text-xl text-gray-600 dark:text-gray-400">No stories found.</p>
+            <% if (user) { %>
+                <p class="mt-4">
+                    <a href="/stories/create" class="text-indigo-600 dark:text-indigo-400 hover:underline">
+                        Why not create the first one?
+                    </a>
+                </p>
+            <% } %>
+        </div>
+    <% } %>
+</div> 

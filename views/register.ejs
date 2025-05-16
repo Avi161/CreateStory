@@ -1,0 +1,48 @@
+<div class="max-w-md mx-auto py-10 px-4">
+    <h1 class="text-3xl font-bold mb-6 text-center">Sign Up</h1>
+
+    <%# Flash messages are now handled by layout.ejs %>
+
+    <form action="/auth/register" method="POST" class="space-y-6 bg-white p-8 rounded-xl shadow">
+        <div class="form-group">
+            <label class="form-label" for="username">Username</label>
+            <input type="text" id="username" name="username" class="input-field" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input type="email" id="email" name="email" class="input-field" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="password">Password</label>
+            <input type="password" id="password" name="password" class="input-field" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" class="input-field" required>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary w-full">Sign Up</button>
+        </div>
+        <div class="text-center">
+            <p class="text-sm text-gray-600">
+                Already have an account? <a href="/auth/login" class="text-indigo-600 hover:underline">Login</a>
+            </p>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Basic client-side password confirmation
+    const form = document.querySelector('form');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+
+    form.addEventListener('submit', function(event) {
+        if (password.value !== confirmPassword.value) {
+            event.preventDefault(); // Stop form submission
+            // You can add a more user-friendly error message display here
+            alert('Passwords do not match.'); 
+            confirmPassword.focus();
+        }
+    });
+</script> 
