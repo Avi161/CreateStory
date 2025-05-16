@@ -23,11 +23,9 @@ app.use(helmet({
     contentSecurityPolicy: {
         directives: {
             defaultSrc: ["'self'"],
-            scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "cdn.jsdelivr.net", "cdn.tailwindcss.com", "unpkg.com"],
-            styleSrc: ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net", "fonts.googleapis.com"],
-            imgSrc: ["'self'", "data:", "blob:", "cdn.jsdelivr.net"],
-            fontSrc: ["'self'", "fonts.gstatic.com"],
-            connectSrc: ["'self'", "ws:", "wss:"],
+            scriptSrc: ["'self'", "'unsafe-inline'"],
+            styleSrc: ["'self'", "'unsafe-inline'"],
+            imgSrc: ["'self'", "data:", "https:"],
         },
     },
 }));
@@ -43,15 +41,24 @@ app.set('layout', 'partials/layout');
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+// Trust proxy (important for production)
+if (process.env.NODE_ENV === 'production') {
+    app.set('trust proxy', 1);
+}
+
 // Session configuration
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'your-default-secret',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGODB_URI,
+        ttl: 24 * 60 * 60 // 1 day
+    }),
     cookie: {
         secure: process.env.NODE_ENV === 'production',
-        maxAge: 1000 * 60 * 60 * 24 // 24 hours
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000 // 1 day
     }
 }));
 
@@ -109,16 +116,14 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).render('error', {
-        title: 'Error',
         message: process.env.NODE_ENV === 'production' 
             ? 'Something went wrong!' 
-            : err.message,
-        error: process.env.NODE_ENV === 'production' ? {} : err
+            : err.message
     });
 });
 
 // Start server
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
 }); 
