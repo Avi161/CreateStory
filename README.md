@@ -23,9 +23,10 @@ CreateStory is a web application that allows users to create, edit, and share in
 
 https://createstory.onrender.com/
 
-## License
+![image](https://github.com/user-attachments/assets/def76cbe-e550-44f0-b8c2-9a7e89a38b75)
 
-![image](https://github.com/user-attachments/assets/6823a711-d1a7-408a-90df-792bc9007aa4)
+
+## License
 
 
 MIT
