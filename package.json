@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "build": "npm install && npm install tailwindcss postcss autoprefixer && npx tailwindcss -i ./public/css/main.css -o ./public/css/output.css",
+    "build": "npm install",
     "build:css": "postcss public/css/main.css -o public/css/output.css",
     "watch:css": "postcss public/css/main.css -o public/css/output.css --watch"
   },
